@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dilli - Siaa Kashyap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="sidebar">
+      <div class="titles">
+        <h1>siaa kashyap</h1>
+        <p>portfolio 2.0</p>
+      </div>
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+      </ul>
+    </div>
+
+    <main class="projects-main">
+      <h1>dilli</h1>
+      <p>Interactive typography press mouse to add jitter.</p>
+      <div id="sketch-container"></div>
+    </main>
+
+  </div>
+
+  <script>
+    let font;
+    let points = [];
+    let msg = "दिल्ली";
+    let fontSize = 150;
+    let overload = 0;
+
+    function preload() {
+      font = loadFont('Hindi.ttf');
+    }
+
+    function setup() {
+      let canvas = createCanvas(500, 400);
+      canvas.parent('sketch-container');
+
+      points = font.textToPoints(msg, 50, 200, fontSize, {
+        sampleFactor: 0.1
+      });
+    }
+
+    function draw() {
+      background(0);
+
+      if (mouseIsPressed) {
+        overload += 0.5;
+      } else {
+        overload = max(0, overload - 0.3);
+      }
+
+      noStroke();
+
+      for (let i = 0; i < points.length; i++) {
+        let jitter = random(-overload, overload);
+
+        let pick = int(random(4));
+        let r, g, b;
+
+        if (pick === 0) { r = 255; g = 200; b = 80; }
+        if (pick === 1) { r = 255; g = 140; b = 60; }
+        if (pick === 2) { r = 255; g = 90;  b = 140; }
+        if (pick === 3) { r = 255; g = 240; b = 180; }
+
+        fill(r, g, b);
+
+        ellipse(
+          points[i].x + jitter,
+          points[i].y + jitter,
+          5
+        );
+      }
+    }
+  </script>
+</body>
+</html>

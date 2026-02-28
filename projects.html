@@ -18,46 +18,27 @@
 
       <ul>
         <li><a href="index.html">home</a></li>
-        <li><a href="advanced.html">advanced cc</a></li>
         <li><a class="active" href="projects.html">projects</a></li>
       </ul>
     </div>
 
     <main class="projects-main">
       <h1>projects</h1>
-      
+
       <div class="projects-grid">
-        <div class="project-card project-card-pink">
-          <h2>can you remember</h2>
-          <p>memory game</p>
-          <video controls>
-            <source src="projects/Can you remember(memory game).mov" type="video/mp4">
-          </video>
-        </div>
-
-        <div class="project-card project-card-blue">
-          <h2>city of dreams</h2>
-          <img src="projects/cityofdreams.png" alt="City of Dreams">
-        </div>
-
-        <div class="project-card project-card-peach">
-          <h2>yin yang</h2>
-          <img src="projects/yinyang.png" alt="Yin Yang">
-        </div>
-
-        <div class="project-card project-card-lavender">
-          <h2>coffee animation</h2>
-          <video controls>
-            <source src="projects/assignment1.mov" type="video/mp4">
-          </video>
-        </div>
-
-        <div class="project-card project-card-mint">
-          <h2>hot or iced?</h2>
-          <p>touchdesigner project</p>
-          <video controls>
-            <source src="projects/touchdesigner.mov" type="video/mp4">
-          </video>
+        <div class="project-card project-card-pink project-card-expandable">
+          <details class="project-details">
+            <summary class="project-summary">
+              <h2>Interactive Typography</h2>
+              <p>p5.js typography sketches</p>
+              <span class="project-toggle" aria-hidden="true">▼</span>
+            </summary>
+            <div class="project-sub-buttons">
+              <a href="alive.html" class="project-button">Alive</a>
+              <a href="dilli.html" class="project-button">Dilli</a>
+              <a href="now.html" class="project-button">Now</a>
+            </div>
+          </details>
         </div>
       </div>
     </main>

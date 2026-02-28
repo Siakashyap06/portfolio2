@@ -186,6 +186,58 @@ main p{
   background-color: #b4e1e5;
 }
 
+.project-details{
+  list-style: none;
+}
+
+.project-summary{
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.project-summary::-webkit-details-marker{
+  display: none;
+}
+
+.project-summary .project-toggle{
+  margin-left: auto;
+  font-size: 14px;
+  transition: transform 0.2s ease;
+}
+
+.project-details[open] .project-summary .project-toggle{
+  transform: rotate(180deg);
+}
+
+.project-sub-buttons{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 2px solid rgba(36, 27, 45, 0.15);
+}
+
+.project-sub-buttons .project-button{
+  display: inline-block;
+  padding: 10px 20px;
+  background: #241b2d;
+  color: #ffd6ea;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 8px;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.project-sub-buttons .project-button:hover{
+  background: #3a2a6a;
+  transform: translateY(-2px);
+}
+
 .project-card-blue{
   background-color: #d6eaff;
 }

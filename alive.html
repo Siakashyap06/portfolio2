@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alive - Siaa Kashyap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="sidebar">
+      <div class="titles">
+        <h1>siaa kashyap</h1>
+        <p>portfolio 2.0</p>
+      </div>
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+      </ul>
+    </div>
+
+    <main class="projects-main">
+      <h1>alive</h1>
+      <p>Drag to spell ALIVE — letters fade over time.</p>
+      <div id="sketch-container"></div>
+    </main>
+
+  </div>
+
+  <script>
+    let font;
+    let letters = [];
+    let word = "ALIVE";
+    let idx = 0;
+
+    function preload() {
+      font = loadFont("font1.ttf");
+    }
+
+    function setup() {
+      let canvas = createCanvas(400, 400);
+      canvas.parent('sketch-container');
+      textFont(font);
+      textAlign(CENTER, CENTER);
+    }
+
+    function draw() {
+      background("#0B1B3B");
+      fill(255);
+      textSize(42);
+      noStroke();
+
+      for (let i = letters.length - 1; i >= 0; i--) {
+        text(letters[i].ch, letters[i].x, letters[i].y);
+
+        letters[i].life--;
+        if (letters[i].life <= 0) letters.splice(i, 1);
+      }
+    }
+
+    function mouseDragged() {
+      if (letters.length === 0 || dist(mouseX, mouseY, letters[letters.length - 1].x, letters[letters.length - 1].y) > 18) {
+        letters.push({ x: mouseX, y: mouseY, ch: word[idx], life: 140 });
+        idx = (idx + 1) % word.length;
+      }
+    }
+  </script>
+</body>
+</html>
