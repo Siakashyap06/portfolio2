@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Experimental Camera - Siaa Kashyap</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="page">
+    <div class="sidebar">
+      <div class="titles">
+        <h1>siaa kashyap</h1>
+        <p>portfolio 2.0</p>
+      </div>
+      <ul>
+        <li><a href="index.html">home</a></li>
+        <li><a href="projects.html">projects</a></li>
+      </ul>
+    </div>
+
+    <main class="projects-main">
+      <h1>experimental camera</h1>
+      <p>FaceMesh and rainbow camera filter.</p>
+      <div id="sketch-container"></div>
+    </main>
+  </div>
+
+  <script>
+    let faceMesh;
+    let video;
+    let faces = [];
+
+    let filter1;
+    let slider;
+
+    let meshButton;
+    let filterButton;
+    let saveButton;
+
+    let mode = "mesh";
+    let canvas;
+
+    function preload() {
+      faceMesh = ml5.faceMesh({
+        maxFaces: 1,
+        flipped: true
+      });
+    }
+
+    function gotFaces(results) {
+      faces = results;
+    }
+
+    function setup() {
+      canvas = createCanvas(640, 480);
+      canvas.parent("sketch-container");
+
+      video = createCapture(VIDEO, { flipped: true });
+      video.size(width, height);
+      video.hide();
+
+      faceMesh.detectStart(video, gotFaces);
+
+      filter1 = createGraphics(width, height);
+      filter1.pixelDensity(1);
+
+      slider = createSlider(0, 255, 127);
+      slider.position(width / 2 - 50, height - 30);
+      slider.style("width", "100px");
+
+      meshButton = createButton("faceMesh");
+      meshButton.position(30, 20);
+      meshButton.mousePressed(() => mode = "mesh");
+
+      filterButton = createButton("rainbow filter");
+      filterButton.position(130, 20);
+      filterButton.mousePressed(() => mode = "filter");
+
+      saveButton = createButton("Save Pic");
+      saveButton.position(30, height - 40);
+      saveButton.mousePressed(savePic);
+    }
+
+    function draw() {
+      background(220);
+      image(video, 0, 0, width, height);
+
+      if (mode === "mesh") {
+        drawFaceMeshMode();
+      } else if (mode === "filter") {
+        drawFilterMode();
+      }
+    }
+
+    function drawFaceMeshMode() {
+      if (faces.length > 0) {
+        let face = faces[0];
+
+        noStroke();
+
+        beginShape();
+        fill(241, 194, 125);
+        for (let p of face.faceOval.keypoints) {
+          vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
+
+        beginShape();
+        fill(173, 216, 230);
+        for (let p of face.leftEye.keypoints) {
+          vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
+
+        beginShape();
+        fill(255, 200, 255);
+        for (let p of face.leftEyebrow.keypoints) {
+          vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
+
+        beginShape();
+        fill("#90EE90");
+        for (let p of face.rightEye.keypoints) {
+          vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
+
+        beginShape();
+        fill("#00008B");
+        for (let p of face.rightEyebrow.keypoints) {
+          vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
+
+        beginShape();
+        fill(255, 0, 0);
+        for (let p of face.lips.keypoints) {
+          vertex(p.x, p.y);
+        }
+        endShape(CLOSE);
+      }
+    }
+
+    function drawFilterMode() {
+      let val = slider.value();
+
+      filter1.loadPixels();
+      for (let j = 0; j < height; j++) {
+        for (let i = 0; i < width; i++) {
+          let index = (i + j * width) * 4;
+
+          filter1.pixels[index] = val;
+          filter1.pixels[index + 1] = i;
+          filter1.pixels[index + 2] = j;
+          filter1.pixels[index + 3] = 100;
+        }
+      }
+      filter1.updatePixels();
+
+      image(filter1, 0, 0, width, height);
+    }
+
+    function savePic() {
+      saveCanvas(canvas, "photo", "jpg");
+    }
+  </script>
+</body>
+</html>
