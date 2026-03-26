@@ -1,33 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.js"></script>
-  <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Experimental Camera - Siaa Kashyap</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <title>Experimental Camera</title>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/p5.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.11.11/lib/addons/p5.sound.min.js"></script>
+  <script src="https://unpkg.com/ml5@1/dist/ml5.js"></script>
+  <style>
+    body {
+      margin: 0;
+      background: #111;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    #sketch-container {
+      position: relative;
+      width: 640px;
+      margin: 40px auto;
+    }
+
+    canvas {
+      display: block;
+    }
+  </style>
 </head>
-
 <body>
-  <div class="page">
-    <div class="sidebar">
-      <div class="titles">
-        <h1>siaa kashyap</h1>
-        <p>portfolio 2.0</p>
-      </div>
-      <ul>
-        <li><a href="index.html">home</a></li>
-        <li><a href="projects.html">projects</a></li>
-      </ul>
-    </div>
-
-    <main class="projects-main">
-      <h1>experimental camera</h1>
-      <p>FaceMesh and rainbow camera filter.</p>
-      <div id="sketch-container"></div>
-    </main>
-  </div>
+  <div id="sketch-container"></div>
 
   <script>
     let faceMesh;
@@ -69,20 +68,32 @@
       filter1.pixelDensity(1);
 
       slider = createSlider(0, 255, 127);
-      slider.position(width / 2 - 50, height - 30);
+      slider.parent("sketch-container");
+      slider.position(270, 440);
       slider.style("width", "100px");
 
       meshButton = createButton("faceMesh");
+      meshButton.parent("sketch-container");
       meshButton.position(30, 20);
-      meshButton.mousePressed(() => mode = "mesh");
+      meshButton.mousePressed(() => {
+        mode = "mesh";
+        slider.hide();
+      });
 
       filterButton = createButton("rainbow filter");
+      filterButton.parent("sketch-container");
       filterButton.position(130, 20);
-      filterButton.mousePressed(() => mode = "filter");
+      filterButton.mousePressed(() => {
+        mode = "filter";
+        slider.show();
+      });
 
       saveButton = createButton("Save Pic");
-      saveButton.position(30, height - 40);
+      saveButton.parent("sketch-container");
+      saveButton.position(30, 440);
       saveButton.mousePressed(savePic);
+
+      slider.hide();
     }
 
     function draw() {
@@ -102,13 +113,15 @@
 
         noStroke();
 
+        // face oval
         beginShape();
-        fill(241, 194, 125);
+        fill(241, 194, 125, 180);
         for (let p of face.faceOval.keypoints) {
           vertex(p.x, p.y);
         }
         endShape(CLOSE);
 
+        // left eye
         beginShape();
         fill(173, 216, 230);
         for (let p of face.leftEye.keypoints) {
@@ -116,6 +129,7 @@
         }
         endShape(CLOSE);
 
+        // left eyebrow
         beginShape();
         fill(255, 200, 255);
         for (let p of face.leftEyebrow.keypoints) {
@@ -123,6 +137,7 @@
         }
         endShape(CLOSE);
 
+        // right eye
         beginShape();
         fill("#90EE90");
         for (let p of face.rightEye.keypoints) {
@@ -130,6 +145,7 @@
         }
         endShape(CLOSE);
 
+        // right eyebrow
         beginShape();
         fill("#00008B");
         for (let p of face.rightEyebrow.keypoints) {
@@ -137,6 +153,7 @@
         }
         endShape(CLOSE);
 
+        // lips
         beginShape();
         fill(255, 0, 0);
         for (let p of face.lips.keypoints) {
