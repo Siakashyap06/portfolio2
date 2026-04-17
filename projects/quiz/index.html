@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creative Tech Profile Quiz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="quiz-container">
+    <div class="top-bar">
+      <h1>Creative Tech Profile Quiz</h1>
+      <p class="subtitle">Find your creative type</p>
+    </div>
+
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progress-bar"></div>
+    </div>
+    <p class="progress-text" id="progress-text">Page 1 of 10</p>
+
+    <div id="quiz-pages">
+      <!-- PAGE 1 -->
+      <div class="page active">
+        <h2>Tell us about yourself</h2>
+
+        <label>Name</label>
+        <input type="text" id="name" placeholder="Your name" />
+
+        <label>University</label>
+        <input type="text" id="university" placeholder="Your university" />
+
+        <label>Major</label>
+        <input type="text" id="major" placeholder="Your major" />
+      </div>
+
+      <!-- PAGE 2 -->
+      <div class="page">
+        <h2>1. What part of a project excites you most?</h2>
+        <div class="options">
+          <button class="option" data-question="q1" data-value="visual">Designing the visuals</button>
+          <button class="option" data-question="q1" data-value="technical">Building the system</button>
+          <button class="option" data-question="q1" data-value="physical">Making something physical</button>
+          <button class="option" data-question="q1" data-value="conceptual">Developing the idea</button>
+        </div>
+      </div>
+
+      <!-- PAGE 3 -->
+      <div class="page">
+        <h2>2. Which tool do you gravitate toward?</h2>
+        <div class="options">
+          <button class="option" data-question="q2" data-value="visual">Adobe / Figma</button>
+          <button class="option" data-question="q2" data-value="technical">Coding / Unity / p5.js</button>
+          <button class="option" data-question="q2" data-value="physical">Arduino / fabrication</button>
+          <button class="option" data-question="q2" data-value="conceptual">Sketchbook / research</button>
+        </div>
+      </div>
+
+      <!-- PAGE 4 -->
+      <div class="page">
+        <h2>3. How do you work best?</h2>
+        <div class="options">
+          <button class="option" data-question="q3" data-value="technical">With a clear plan</button>
+          <button class="option" data-question="q3" data-value="physical">By experimenting</button>
+          <button class="option" data-question="q3" data-value="visual">With other people</button>
+          <button class="option" data-question="q3" data-value="conceptual">Alone first</button>
+        </div>
+      </div>
+
+      <!-- PAGE 5 -->
+      <div class="page">
+        <h2>4. In a group project, what role do you take?</h2>
+        <div class="options">
+          <button class="option" data-question="q4" data-value="technical">Organizer</button>
+          <button class="option" data-question="q4" data-value="conceptual">Idea generator</button>
+          <button class="option" data-question="q4" data-value="physical">Builder</button>
+          <button class="option" data-question="q4" data-value="visual">Detail finisher</button>
+        </div>
+      </div>
+
+      <!-- PAGE 6 -->
+      <div class="page">
+        <h2>5. What matters more to you?</h2>
+        <div class="options">
+          <button class="option" data-question="q5" data-value="visual">Strong final look</button>
+          <button class="option" data-question="q5" data-value="physical">Trying something new</button>
+          <button class="option" data-question="q5" data-value="conceptual">Meaning and story</button>
+          <button class="option" data-question="q5" data-value="technical">Solving the problem</button>
+        </div>
+      </div>
+
+      <!-- PAGE 7 -->
+      <div class="page">
+        <h2>6. What kind of collaboration feels best?</h2>
+        <div class="options">
+          <button class="option" data-question="q6" data-value="visual">Similar interests</button>
+          <button class="option" data-question="q6" data-value="conceptual">Different strengths</button>
+          <button class="option" data-question="q6" data-value="technical">Small focused team</button>
+          <button class="option" data-question="q6" data-value="physical">Open creative group</button>
+        </div>
+      </div>
+
+      <!-- PAGE 8 -->
+      <div class="page">
+        <h2>7. What are you most drawn to making?</h2>
+        <div class="options">
+          <button class="option" data-question="q7" data-value="visual">Graphics / media</button>
+          <button class="option" data-question="q7" data-value="technical">Interactive systems</button>
+          <button class="option" data-question="q7" data-value="physical">Installations / objects</button>
+          <button class="option" data-question="q7" data-value="conceptual">Research-based work</button>
+        </div>
+      </div>
+
+      <!-- PAGE 9 -->
+      <div class="page">
+        <h2>8. What is your current goal?</h2>
+        <div class="options">
+          <button class="option" data-question="q8" data-value="visual">Build my portfolio</button>
+          <button class="option" data-question="q8" data-value="conceptual">Find collaborators</button>
+          <button class="option" data-question="q8" data-value="technical">Start something new</button>
+          <button class="option" data-question="q8" data-value="physical">Explore my direction</button>
+        </div>
+      </div>
+
+      <!-- PAGE 10 -->
+      <div class="page result-page">
+        <h2>Your Result</h2>
+        <div id="result-card">
+          <h3 id="result-title">Your result will appear here</h3>
+          <p id="result-description"></p>
+          <div class="user-summary" id="user-summary"></div>
+        </div>
+        <button id="restart-btn">Retake Quiz</button>
+      </div>
+    </div>
+
+    <div class="nav-buttons">
+      <button id="prev-btn">Previous</button>
+      <button id="next-btn">Next</button>
+      <button id="submit-btn">See Result</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
