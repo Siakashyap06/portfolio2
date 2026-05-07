@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Tarot Reader</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="card">
+
+    <h1>AI Tarot Reader</h1>
+
+    <p>
+      Ask a question, choose your mood, and let the card guide you.
+    </p>
+
+    <input
+      id="questionInput"
+      type="text"
+      placeholder="What are you wondering about?"
+    >
+
+    <select id="moodInput">
+      <option value="confused">Confused</option>
+      <option value="anxious">Anxious</option>
+      <option value="hopeful">Hopeful</option>
+      <option value="stuck">Stuck</option>
+      <option value="excited">Excited</option>
+    </select>
+
+    <button type="button" id="drawBtn">
+      Draw My Card
+    </button>
+
+    <div id="result"></div>
+
+  </div>
+
+  <script src="script.js"></script>
+
+</body>
+</html>
